@@ -275,6 +275,30 @@ body {
     transform: scale(1.05);
 }
 
+.rose-day-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    background: linear-gradient(135deg, #c2185b, #e91e63);
+    color: white;
+    box-shadow: 0 5px 15px rgba(194, 24, 91, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.rose-day-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(194, 24, 91, 0.6);
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+}
+
 /* Responsive design */
 @media (max-width: 600px) {
     .title {
@@ -288,5 +312,12 @@ body {
     
     .buttons-container {
         flex-direction: column;
+    }
+    
+    .rose-day-btn {
+        top: 10px;
+        right: 10px;
+        padding: 10px 20px;
+        font-size: 0.9em;
     }
 }
