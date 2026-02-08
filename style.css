@@ -275,28 +275,49 @@ body {
     transform: scale(1.05);
 }
 
-.rose-day-btn {
+.top-buttons {
     position: fixed;
     top: 20px;
     right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.rose-day-btn,
+.propose-day-btn {
     padding: 12px 25px;
     font-size: 1.1em;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     font-weight: bold;
-    background: linear-gradient(135deg, #c2185b, #e91e63);
     color: white;
     box-shadow: 0 5px 15px rgba(194, 24, 91, 0.4);
     transition: all 0.3s ease;
-    z-index: 1000;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.rose-day-btn {
+    background: linear-gradient(135deg, #c2185b, #e91e63);
 }
 
 .rose-day-btn:hover {
     transform: scale(1.1);
     box-shadow: 0 8px 25px rgba(194, 24, 91, 0.6);
     background: linear-gradient(135deg, #e91e63, #c2185b);
+}
+
+.propose-day-btn {
+    background: linear-gradient(135deg, #7b1fa2, #9c27b0);
+    box-shadow: 0 5px 15px rgba(123, 31, 162, 0.4);
+}
+
+.propose-day-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(123, 31, 162, 0.6);
+    background: linear-gradient(135deg, #9c27b0, #7b1fa2);
 }
 
 /* Responsive design */
@@ -314,9 +335,14 @@ body {
         flex-direction: column;
     }
     
-    .rose-day-btn {
+    .top-buttons {
         top: 10px;
         right: 10px;
+        gap: 8px;
+    }
+    
+    .rose-day-btn,
+    .propose-day-btn {
         padding: 10px 20px;
         font-size: 0.9em;
     }
