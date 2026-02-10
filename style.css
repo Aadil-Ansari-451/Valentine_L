@@ -287,7 +287,8 @@ body {
 
 .rose-day-btn,
 .propose-day-btn,
-.chocolate-day-btn {
+.chocolate-day-btn,
+.teddy-day-btn {
     padding: 12px 25px;
     font-size: 1.1em;
     border: none;
@@ -332,6 +333,17 @@ body {
     background: linear-gradient(135deg, #8d6e63, #5d4037);
 }
 
+.teddy-day-btn {
+    background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
+}
+
+.teddy-day-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
+    background: linear-gradient(135deg, #ff69b4, #ffb6c1);
+}
+
 /* Responsive design */
 @media (max-width: 600px) {
     .title {
@@ -355,7 +367,8 @@ body {
     
     .rose-day-btn,
     .propose-day-btn,
-    .chocolate-day-btn {
+    .chocolate-day-btn,
+    .teddy-day-btn {
         padding: 10px 20px;
         font-size: 0.9em;
     }

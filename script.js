@@ -29,47 +29,46 @@ const content = document.querySelector('.content');
 // Track mouse position
 let mouseX = 0;
 let mouseY = 0;
+let rafId = null;
+const MOVE_THRESHOLD = 180;   // Start moving button when cursor is within this
+const RESET_THRESHOLD = 280;  // Only reset when cursor is beyond this (prevents flickering)
 
 document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
     
-    // Get No button position
-    const noBtnRect = noBtn.getBoundingClientRect();
-    const noBtnCenterX = noBtnRect.left + noBtnRect.width / 2;
-    const noBtnCenterY = noBtnRect.top + noBtnRect.height / 2;
-    
-    // Calculate distance from cursor to No button center
-    const distance = Math.sqrt(
-        Math.pow(mouseX - noBtnCenterX, 2) + 
-        Math.pow(mouseY - noBtnCenterY, 2)
-    );
-    
-    // If cursor is within 200px of the No button, move it away (increased detection range)
-    if (distance < 200) {
-        // Calculate angle from No button to cursor
-        const angle = Math.atan2(mouseY - noBtnCenterY, mouseX - noBtnCenterX);
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => {
+        rafId = null;
         
-        // Move No button away from cursor (opposite direction) - much faster now
-        const moveDistance = 200 - distance;
-        // Increased multiplier from 0.5 to 1.5 for faster movement
-        const moveX = Math.cos(angle + Math.PI) * moveDistance * 1.5;
-        const moveY = Math.sin(angle + Math.PI) * moveDistance * 1.5;
+        // Get No button position (original center, not transformed - use offsetParent or fixed calculation)
+        const noBtnRect = noBtn.getBoundingClientRect();
+        const noBtnCenterX = noBtnRect.left + noBtnRect.width / 2;
+        const noBtnCenterY = noBtnRect.top + noBtnRect.height / 2;
         
-        // Apply transform to move the button
-        noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        const distance = Math.sqrt(
+            Math.pow(mouseX - noBtnCenterX, 2) + 
+            Math.pow(mouseY - noBtnCenterY, 2)
+        );
         
-        // Highlight Yes button when cursor is near No
-        yesBtn.classList.add('highlighted');
-    } else {
-        // Gradually reset No button position when cursor is far (but not instantly)
-        const currentTransform = noBtn.style.transform;
-        if (currentTransform && currentTransform !== 'translate(0, 0)') {
-            // Slowly return to center
+        const isMoved = noBtn.dataset.moved === 'true';
+        
+        if (distance < MOVE_THRESHOLD) {
+            const angle = Math.atan2(mouseY - noBtnCenterY, mouseX - noBtnCenterX);
+            const moveDistance = MOVE_THRESHOLD - distance;
+            const moveX = Math.cos(angle + Math.PI) * moveDistance * 1.2;
+            const moveY = Math.sin(angle + Math.PI) * moveDistance * 1.2;
+            
+            noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            noBtn.dataset.moved = 'true';
+            yesBtn.classList.add('highlighted');
+        } else if (distance > RESET_THRESHOLD) {
             noBtn.style.transform = 'translate(0, 0)';
+            noBtn.dataset.moved = '';
+            yesBtn.classList.remove('highlighted');
         }
-        yesBtn.classList.remove('highlighted');
-    }
+        // Between thresholds: keep current state (hysteresis prevents flicker)
+    });
 });
 
 // Yes button click handler
