@@ -289,7 +289,8 @@ body {
 .propose-day-btn,
 .chocolate-day-btn,
 .teddy-day-btn,
-.promise-day-btn {
+.promise-day-btn,
+.hug-day-btn {
     padding: 12px 25px;
     font-size: 1.1em;
     border: none;
@@ -356,6 +357,17 @@ body {
     background: linear-gradient(135deg, #26a69a, #00796b);
 }
 
+.hug-day-btn {
+    background: linear-gradient(135deg, #ec407a, #f06292);
+    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.5);
+}
+
+.hug-day-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.6);
+    background: linear-gradient(135deg, #f06292, #ec407a);
+}
+
 /* Responsive design */
 @media (max-width: 600px) {
     .title {
@@ -381,7 +393,8 @@ body {
     .propose-day-btn,
     .chocolate-day-btn,
     .teddy-day-btn,
-    .promise-day-btn {
+    .promise-day-btn,
+    .hug-day-btn {
         padding: 10px 20px;
         font-size: 0.9em;
     }
